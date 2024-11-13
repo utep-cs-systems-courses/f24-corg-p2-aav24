@@ -4,13 +4,14 @@
 #include "switches.h"
 #include "led_pattern.h"
 
-volatile int counter = 0;
+volatile unsigned int counter = 0;
 int led_pattern_state = default_pattern;
 
 
 void main(void){
 
   configureClocks();
+  enableWDTInterrupts();
   init_switches();
   led_init();
 
@@ -25,4 +26,14 @@ __interrupt_vec(PORT2_VECTOR) Port_2()
     P2IFG &= ~SWITCHES;    /* clears pending interrupt flags */
     switch_interrupt_handler();
   }
+}
+
+void
+__interrupt_vec(WDT_VECTOR) WDT()
+{
+  counter ++;
+  if (counter >= 250){
+    counter = 0;
+  }
+  led_update();
 }

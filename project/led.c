@@ -1,5 +1,6 @@
 #include "led.h"
 #include <msp430.h>
+#include "led_pattern.h"
 // implements functions for led.h
 
 // initializes leds for output
@@ -47,5 +48,5 @@ void toggle_leds(){
   toggle_green();
 }
 void led_update(){
-  
+  led_pattern_update();
 }
