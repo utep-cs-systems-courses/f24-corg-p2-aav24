@@ -16,6 +16,7 @@ void led_blink(){
   if (counter % 10 == 0){
     toggle_green();
   }
+  red_off();
 }
 
 void led_dim(){
@@ -27,6 +28,7 @@ void led_rapid_blink(){
   if (counter % 2 == 0){
     toggle_green();
   }
+  red_off();
 }
 
 void led_transition(){
