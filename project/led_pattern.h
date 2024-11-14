@@ -9,10 +9,10 @@
 
 void led_pattern_update();
 void led_default();
-void led_pattern1();
-void led_pattern2();
-void led_pattern3();
-void led_pattern4();
+void led_blink();
+void led_dim();
+void led_rapid_blink();
+void led_transition();
 
 extern int led_pattern_state;
 
