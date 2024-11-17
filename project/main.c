@@ -3,6 +3,7 @@
 #include "timerLib/libTimer.h"
 #include "switches.h"
 #include "led_pattern.h"
+#include "buzzer.h"
 
 volatile unsigned int counter = 0;
 int led_pattern_state = default_pattern;
@@ -14,8 +15,9 @@ void main(void){
   enableWDTInterrupts();
   init_switches();
   led_init();
-  P1DIR |= LEDS;
-  P1OUT |= LEDS;
+  buzzer_init();
+
+  
   or_sr(0x18); // turn CPU off
 
 }

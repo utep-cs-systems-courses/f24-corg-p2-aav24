@@ -2,6 +2,7 @@
 #include "led_pattern.h"
 #include "switches.h"
 #include "led.h"
+#include "buzzer.h"
 
 extern int led_pattern_state;
 
@@ -19,6 +20,7 @@ void led_blink(){
     green_on();
     if (counter % 25 == 0){
       toggle_red();
+      blink_buzzer();
     }
   } else {
     red_on();
@@ -26,6 +28,8 @@ void led_blink(){
       toggle_green();
     }
   }
+
+  
 }
 
 short min = 0;
@@ -33,6 +37,7 @@ short max = 1000;
 short current = 0;
 
 void led_dim(){
+  buzzer_set_period(0);
   if (counter % 2 == 0){
     toggle_red();
     toggle_green();
@@ -40,6 +45,7 @@ void led_dim(){
 }
 
 void led_rapid_blink(){
+  siren_buzzer();
   if (counter % 10 == 0){
     toggle_green();
     toggle_red();
@@ -49,6 +55,12 @@ void led_rapid_blink(){
 void led_transition(){
   toggle_green();
   toggle_red();
+
+  if(red_state){
+    buzzer_set_period(1000);
+  } else {
+    buzzer_set_period(0);
+  }
 }
 
 void led_pattern_update(){
@@ -56,6 +68,7 @@ void led_pattern_update(){
   switch(led_pattern_state){
   case default_pattern:
     led_default();
+    
     break;
   case gs1_pattern:
     led_blink();

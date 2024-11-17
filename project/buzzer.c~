@@ -40,10 +40,10 @@ void siren_buzzer(){
   if (counter % 10 == 0){
     if(low){
       buzzer_set_period(2000);
-      low = 0;
+      low = 1;
     } else {
       buzzer_set_period(4000);
-      low = 1;
+      low = 0;
     }
   }
 }
