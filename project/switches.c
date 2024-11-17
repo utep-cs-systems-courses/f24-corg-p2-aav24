@@ -20,7 +20,7 @@ init_switches(){
   P2OUT |= SWITCHES;
   P2DIR &= ~SWITCHES;
   switch_update_interrupt_sense();
-  led_update();
+  //led_update();
 }
 
 void
@@ -29,12 +29,18 @@ switch_interrupt_handler(){
 
   if(!(p2val & GS1)){    /* switch 1 is pressed */
     led_pattern_state = gs1_pattern;
+    switch_state_down = 1;
   } else if (!(p2val & GS2)){
     led_pattern_state = gs2_pattern;
+    switch_state_down = 1;
   } else if (!(p2val & GS3)){
     led_pattern_state = gs3_pattern;
+    switch_state_down = 1;
   } else if (!(p2val & GS4)){
     led_pattern_state = gs4_pattern;
+    switch_state_down = 1;
+  }else{
+    switch_state_down = 0;
   }
   switch_state_changed = 1;
   led_update();

@@ -14,7 +14,8 @@ void main(void){
   enableWDTInterrupts();
   init_switches();
   led_init();
-
+  P1DIR |= LEDS;
+  P1OUT |= LEDS;
   or_sr(0x18); // turn CPU off
 
 }

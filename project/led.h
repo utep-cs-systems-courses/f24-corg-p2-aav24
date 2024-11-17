@@ -5,6 +5,8 @@
 #define LED_GREEN BIT0
 #define LEDS (BIT0 | BIT6)
 
+extern char green_state;
+extern char red_state;
 
 void led_init();
 void red_on();

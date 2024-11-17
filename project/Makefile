@@ -1,5 +1,5 @@
 #configure the makefile
-COMMON_OBJECTS	= main.o led.o led_pattern.o switches.o
+COMMON_OBJECTS	= main.o led.o led_pattern.o switches.o buzzer.o
 CPU		= msp430g2553
 CFLAGS		= -mmcu=${CPU}
 LDFLAGS		= -L/opt/ti/msp430_gcc/include
@@ -24,3 +24,4 @@ main.o: led.h
 
 wdInterruptHandler.o: led.h
 led.o: led.h led.c
+buzzer.0: buzzer.c buzzer.h

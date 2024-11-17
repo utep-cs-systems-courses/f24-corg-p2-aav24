@@ -7,28 +7,43 @@ extern int led_pattern_state;
 
 extern unsigned int counter;
 
+extern char switch_state_down;
+
 
 void led_default(){
   leds_off();
 }
 
 void led_blink(){
-  if (counter % 10 == 0){
-    toggle_green();
+  if (counter < 125){
+    green_on();
+    if (counter % 25 == 0){
+      toggle_red();
+    }
+  } else {
+    red_on();
+    if (counter %25 == 0){
+      toggle_green();
+    }
   }
-  red_off();
 }
 
+short min = 0;
+short max = 1000;
+short current = 0;
+
 void led_dim(){
-  green_on();
-  red_on();
+  if (counter % 2 == 0){
+    toggle_red();
+    toggle_green();
+  }
 }
 
 void led_rapid_blink(){
-  if (counter % 2 == 0){
+  if (counter % 10 == 0){
     toggle_green();
+    toggle_red();
   }
-  red_off();
 }
 
 void led_transition(){
@@ -52,7 +67,10 @@ void led_pattern_update(){
     led_rapid_blink();
     break;
   case gs4_pattern:
-    led_transition();
+    if (switch_state_down){
+      led_transition();
+      switch_state_down = 0;
+    } 
     break;
   default:
     led_default();
